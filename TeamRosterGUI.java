@@ -33,8 +33,10 @@ public class TeamRosterGUI {
         JButton editButton = new JButton("Edit");
         JButton deleteButton = new JButton("Delete");
 
-        // Add functionality to buttons here
-
+        // The functionality of the buttons for the players will use the basketball player class
+        // The functionality of the buttons for the shooting statistics will use the shooting statistics class
+        // The two classes mentioned will need more improvements to be able to use the buttons
+        
         panel.add(memberField);
         panel.add(addButton);
         panel.add(editButton);
