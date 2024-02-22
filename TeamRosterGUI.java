@@ -3,8 +3,7 @@ import java.awt.*;
 
 public class TeamRosterGUI {
     private JFrame frame;
-    private DefaultListModel<String> teamListModel;
-    private JList<String> teamList;
+
 
     public TeamRosterGUI() {
         initializeUI();
