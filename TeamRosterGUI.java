@@ -1,13 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class TeamRosterApp {
+public class TeamRosterGUI {
     private JFrame frame;
     private DefaultListModel<String> teamListModel;
     private JList<String> teamList;
     private JTabbedPane tabbedPane;
 
-    public TeamRosterApp() {
+    public TeamRosterGUI() {
         initializeUI();
     }
 
@@ -35,6 +35,10 @@ public class TeamRosterApp {
         frame.add(controlPanel, BorderLayout.SOUTH);
 
         frame.setVisible(true);
+        final JComboBox<String> cb = new JComboBox<String>();
+
+        cb.setVisible(true);
+        statisticsPanel.add(cb);
     }
 
     private JPanel createControlPanel() {
@@ -80,6 +84,6 @@ public class TeamRosterApp {
     
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(TeamRosterApp::new);
+        SwingUtilities.invokeLater(TeamRosterGUI::new);
     }
 }
