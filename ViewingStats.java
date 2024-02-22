@@ -16,7 +16,7 @@ public class ViewingStats {
         }
         return FreeThrowsMade / FreeThrowsAttempted * 100;
     }
-65
+
     public double ThreePointersPercentage() {
         double ThreePointersMade = 0.0;
         double ThreePointersAttempted = 0.0;
