@@ -19,4 +19,6 @@ class ShootingStatistics {
                 ", freeThrowPercentage=" + freeThrowPercentage +
                 '}';
     }
+
+    
 }
