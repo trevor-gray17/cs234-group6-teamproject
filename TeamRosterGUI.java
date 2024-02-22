@@ -57,7 +57,11 @@ public class TeamRosterGUI {
         // The functionality of the buttons for the players will use the basketball player class
         // The functionality of the buttons for the shooting statistics will use the shooting statistics class
         // The two classes mentioned will need more improvements to be able to use the buttons
-
+        Roster roster = new Roster();
+        final JComboBox<String> cb = new JComboBox<String>(roster.getPlayers().toArray(new String[0]));
+        cb.setEditable(true);
+        cb.setVisible(true);
+        panel.add(cb);
         return panel;
     }
     

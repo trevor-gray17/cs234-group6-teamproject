@@ -1,22 +1,21 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Roster {
-    private List<BasketballPlayer> players;
+    private ArrayList<BasketballPlayer> players;
 
     public Roster() {
         this.players = new ArrayList<>();
     }
 
     public void addPlayer(BasketballPlayer player) {
-        players.add(player);
+        this.players.add(player);
     }
 
-    public boolean removePlayer(BasketballPlayer player) {
-        return players.remove(player);
+    public void removePlayer(BasketballPlayer player) {
+        this.players.remove(player);
     }
 
-    public List<BasketballPlayer> getPlayers() {
+    public ArrayList<BasketballPlayer> getPlayers() {
         return players;
     }
 }
