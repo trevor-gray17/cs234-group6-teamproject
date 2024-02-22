@@ -5,10 +5,10 @@ class BasketballPlayer {
     private String name;
     private int number;
     private String position;
-    private int grade;
+    private String grade;
     private Map<String, ShootingStatistics> shootingStats;
 
-    public BasketballPlayer(String name, int number, String position, int grade) {
+    public BasketballPlayer(String name, int number, String position, String grade) {
         this.name = name;
         this.number = number;
         this.position = position;
@@ -33,3 +33,11 @@ class BasketballPlayer {
                 '}';
     }
 }
+
+
+
+
+// BasketballPlayer player1 = new BasketballPlayer("Player1", 1, "Forward", 10);
+//         player1.addShootingStats("2024-02-19", new ShootingStatistics(0.5, 0.4, 0.8));
+//         player1.addShootingStats("2024-02-17", new ShootingStatistics(0.6, 0.3, 0.7));
+// Example of how to use the classes
