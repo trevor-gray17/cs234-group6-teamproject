@@ -35,6 +35,10 @@ public class TeamRosterGUI {
         frame.add(controlPanel, BorderLayout.SOUTH);
 
         frame.setVisible(true);
+        final JComboBox<String> cb = new JComboBox<String>();
+
+        cb.setVisible(true);
+        statisticsPanel.add(cb);
     }
 
     private JPanel createControlPanel() {
