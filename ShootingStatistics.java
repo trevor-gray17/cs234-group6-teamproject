@@ -9,7 +9,29 @@ class ShootingStatistics {
         this.freeThrowPercentage = freeThrowPercentage;
     }
 
-    // Getters and setters
+    public double getFieldGoalPercentage() {
+        return fieldGoalPercentage;
+    }
+
+    public double getThreePointPercentage() {
+        return threePointPercentage;
+    }
+
+    public double getFreeThrowPercentage() {
+        return freeThrowPercentage;
+    }
+
+    public void setFieldGoalPercentage(double fieldGoalPercentage) {
+        this.fieldGoalPercentage = fieldGoalPercentage;
+    }
+
+    public void setThreePointPercentage(double threePointPercentage) {
+        this.threePointPercentage = threePointPercentage;
+    }
+
+    public void setFreeThrowPercentage(double freeThrowPercentage) {
+        this.freeThrowPercentage = freeThrowPercentage;
+    }
 
     @Override
     public String toString() {
