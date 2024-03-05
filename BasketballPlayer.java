@@ -7,6 +7,7 @@ class BasketballPlayer {
     private int number;
     private String position;
     private int grade;
+    private int year;
     private Map<String, ShootingStatistics> shootingStats;
 
     public BasketballPlayer(String name, int number, String position, int grade) {
@@ -27,6 +28,14 @@ class BasketballPlayer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getYear() {
+        return year;
     }
 
     public int getNumber() {

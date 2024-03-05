@@ -9,41 +9,44 @@ public class PlayerFormDialog extends JDialog {
     private final JButton saveButton;
     private boolean saved = false;
 
+    // Constructor for creating a new player dialog
     public PlayerFormDialog(JFrame parent) {
-        super(parent, "Player Details", true);
-        setLayout(new GridLayout(0, 2));
-
-        nameField = new JTextField();
-        numberField = new JTextField();
-        positionField = new JTextField();
-        yearField = new JTextField();
-        isActiveCheckBox = new JCheckBox();
-        saveButton = new JButton("Save");
-
-        add(new JLabel("Name:"));
-        add(nameField);
-        add(new JLabel("Number:"));
-        add(numberField);
-        add(new JLabel("Position:"));
-        add(positionField);
-        add(new JLabel("Year:"));
-        add(yearField);
-        add(new JLabel("Active:"));
-        add(isActiveCheckBox);
-
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saved = true;
-                setVisible(false);
-            }
-        });
-
-        add(saveButton);
-
-        pack();
-        setLocationRelativeTo(parent);
+        this(parent, null); // Call the other constructor with null as the selectedPlayer
     }
+
+// Constructor for editing an existing player, with pre-population of fields if player is not null
+public PlayerFormDialog(JFrame parent, BasketballPlayer player) {
+    super(parent, "Player Details", true);
+    setLayout(new GridLayout(0, 2));
+
+    nameField = new JTextField(player != null ? player.getName() : "");
+    numberField = new JTextField(player != null ? String.valueOf(player.getNumber()) : "");
+    positionField = new JTextField(player != null ? player.getPosition() : "");
+    yearField = new JTextField(player != null ? String.valueOf(player.getYear()) : "");
+    isActiveCheckBox = new JCheckBox();
+    saveButton = new JButton("Save");
+
+    add(new JLabel("Name:"));
+    add(nameField);
+    add(new JLabel("Number:"));
+    add(numberField);
+    add(new JLabel("Position:"));
+    add(positionField);
+    add(new JLabel("Year:"));
+    add(yearField);
+    add(new JLabel("Active:"));
+    add(isActiveCheckBox);
+
+    saveButton.addActionListener(e -> {
+        saved = true;
+        setVisible(false);
+    });
+
+    add(saveButton);
+    pack();
+    setLocationRelativeTo(parent);
+}
+    
 
     public boolean isSaved() {
         return saved;
