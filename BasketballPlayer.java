@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
+
 class BasketballPlayer {
     private String name;
     private int number;
@@ -72,12 +73,13 @@ class BasketballPlayer {
                 ", shootingStats=" + shootingStats +
                 '}';
     }
+
+
+    // public static void main(String[] args) {
+    //     BasketballPlayer player1 = new BasketballPlayer("Player1", 1, "Forward", 10);
+    //     player1.addShootingStats("2024-02-19", new ShootingStatistics(0.5, 0.4, 0.8));
+    //     player1.addShootingStats("2024-02-17", new ShootingStatistics(0.6, 0.3, 0.7));
+    //     System.out.println(player1);
+    // }
 }
 
-
-
-
-// BasketballPlayer player1 = new BasketballPlayer("Player1", 1, "Forward", 10);
-//         player1.addShootingStats("2024-02-19", new ShootingStatistics(0.5, 0.4, 0.8));
-//         player1.addShootingStats("2024-02-17", new ShootingStatistics(0.6, 0.3, 0.7));
-// Example of how to use the classes

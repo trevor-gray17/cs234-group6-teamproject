@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+
 public class TeamRosterGUI {
     private JFrame frame;
     private DefaultListModel<String> teamListModel;
@@ -35,6 +36,8 @@ public class TeamRosterGUI {
         frame.add(controlPanel, BorderLayout.SOUTH);
 
         frame.setVisible(true);
+
+        // Dropdown for player selection in Statistics
         final JComboBox<String> cb = new JComboBox<String>();
 
         cb.setVisible(true);
