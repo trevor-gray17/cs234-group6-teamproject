@@ -95,6 +95,7 @@ public class TeamRosterGUI {
         JButton editButton = new JButton("Edit");
         JButton deleteButton = new JButton("Delete");
     
+    
         addButton.addActionListener(e -> {
             PlayerFormDialog addDialog = new PlayerFormDialog(frame);
             addDialog.setVisible(true);
