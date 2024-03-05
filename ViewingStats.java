@@ -9,7 +9,7 @@ public class ViewingStats {
 
     public double FreeThrowsPercentage() {
         double FreeThrowsMade = 0.0;
-        double FreeThrowsAttempted =0.0;
+        double FreeThrowsAttempted = 0.0;
         for (ShootingStatistics stats : shootingStats.values()) {
             FreeThrowsMade += stats.getFreeThrowsMade();
             FreeThrowsAttempted += stats.getFreeThrowsAttempted();

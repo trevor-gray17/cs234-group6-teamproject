@@ -23,7 +23,7 @@ public PlayerFormDialog(JFrame parent, BasketballPlayer player) {
     numberField = new JTextField(player != null ? String.valueOf(player.getNumber()) : "");
     positionField = new JTextField(player != null ? player.getPosition() : "");
     yearField = new JTextField(player != null ? String.valueOf(player.getYear()) : "");
-    isActiveCheckBox = new JCheckBox();
+    isActiveCheckBox = new JCheckBox("", player != null ? player.getActive() : true);
     saveButton = new JButton("Save");
 
     add(new JLabel("Name:"));
@@ -68,7 +68,7 @@ public PlayerFormDialog(JFrame parent, BasketballPlayer player) {
         return yearField.getText();
     }
 
-    public boolean isActive() {
+    public boolean getActive() {
         return isActiveCheckBox.isSelected();
     }
 }

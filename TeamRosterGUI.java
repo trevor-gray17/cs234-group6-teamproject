@@ -46,13 +46,12 @@ public class TeamRosterGUI {
         frame.add(controlPanel, BorderLayout.SOUTH);
 
         frame.setVisible(true);
-<<<<<<< HEAD
+
 
         // Dropdown for player selection in Statistics
         final JComboBox<String> cb = new JComboBox<String>();
-=======
     }
->>>>>>> 3950ab858220a28f378b00509fcd09734ee39058
+
 
     private void editSelectedPlayer() {
         String selectedPlayerName = teamList.getSelectedValue();
@@ -68,6 +67,8 @@ public class TeamRosterGUI {
                     playerToEdit.setNumber(Integer.parseInt(editDialog.getNumber()));
                     playerToEdit.setPosition(editDialog.getPosition());
                     playerToEdit.setYear(Integer.parseInt(editDialog.getYear()));
+                    playerToEdit.setActive(editDialog.getActive());
+
     
                     // Refresh the team list to reflect the updated player details.
                     updateTeamList();
@@ -103,7 +104,10 @@ public class TeamRosterGUI {
                     addDialog.getPlayerName(),
                     Integer.parseInt(addDialog.getNumber()), // Convert String to int
                     addDialog.getPosition(),
-                    Integer.parseInt(addDialog.getYear()) // Ensure this matches your dialog's method and data type
+                    Integer.parseInt(addDialog.getYear()), // Ensure this matches your dialog's method and data type
+                    addDialog.getActive() // Assuming there's a method to get the active status
+
+                    
                 );
                 roster.addPlayer(player); // Ensure the Roster class has this method implemented correctly
                 teamListModel.addElement(player.getName()); // Update GUI list
@@ -122,12 +126,21 @@ public class TeamRosterGUI {
                         playerToEdit.setNumber(Integer.parseInt(editDialog.getNumber()));
                         playerToEdit.setPosition(editDialog.getPosition());
                         playerToEdit.setYear(Integer.parseInt(editDialog.getYear()));
+                        playerToEdit.setActive(editDialog.getActive());
                         // Assuming there's a method to update a player in Roster, call it here
                         // This step is crucial to ensure the Roster object has the updated player details
                         roster.updatePlayer(playerToEdit); // This method needs to be implemented in Roster
                         updateTeamList(); // Refresh the team list to reflect the updated player details
                     }
                 }
+            }
+        });
+
+        deleteButton.addActionListener(e -> {
+            String selectedPlayerName = teamList.getSelectedValue();
+            if (selectedPlayerName != null) {
+                roster.removePlayer(selectedPlayerName); // Assuming there's a method to remove a player by name
+                updateTeamList(); // Refresh the team list to reflect the updated player details
             }
         });
         
