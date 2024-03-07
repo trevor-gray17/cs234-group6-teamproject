@@ -2,9 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+
+
+
 
 public class PlayerFormDialog extends JDialog {
-    private final JTextField nameField, numberField, positionField, yearField;
+    private final JTextField nameField, numberField, yearField;
+    private JComboBox<String> positionField;
     private final JCheckBox isActiveCheckBox;
     private final JButton saveButton;
     private boolean saved = false;
@@ -21,8 +26,9 @@ public PlayerFormDialog(JFrame parent, BasketballPlayer player) {
 
     nameField = new JTextField(player != null ? player.getName() : "");
     numberField = new JTextField(player != null ? String.valueOf(player.getNumber()) : "");
-    positionField = new JTextField(player != null ? player.getPosition() : "");
-    yearField = new JTextField(player != null ? String.valueOf(player.getYear()) : "");
+    String[] positions = {"Point Guard", "Shooting Guard", "Small Forward", "Power Forward", "Center"};
+    positionField = new JComboBox<>(positions);
+    positionField.setSelectedItem(player != null ? player.getPosition() : null);    yearField = new JTextField(player != null ? String.valueOf(player.getYear()) : "");
     isActiveCheckBox = new JCheckBox("", player != null ? player.getActive() : true);
     saveButton = new JButton("Save");
 
@@ -61,7 +67,7 @@ public PlayerFormDialog(JFrame parent, BasketballPlayer player) {
     }
 
     public String getPosition() {
-        return positionField.getText();
+        return positionField.getSelectedItem().toString();
     }
 
     public String getYear() {
