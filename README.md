@@ -28,7 +28,7 @@ The Basketball Team Management System is a Java-based application designed to he
 
 1. Clone the repository to your local machine:
    ```
-   git clone [https://github.com/yourusername/basketball-team-management-system.git](https://github.com/trevor-gray17/cs234-group6-teamproject.git)
+   git clone https://github.com/trevor-gray17/cs234-group6-teamproject.git
    ```
 2. Open the project in your preferred Java IDE.
 3. Ensure that the JDK is properly configured in your IDE.
