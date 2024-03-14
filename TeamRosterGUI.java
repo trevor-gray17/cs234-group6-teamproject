@@ -8,7 +8,6 @@ public class TeamRosterGUI {
     private JList<String> teamList;
     private JTabbedPane tabbedPane;
     private Roster roster; // Assume Roster is defined somewhere
-    private static final String FILE_PATH = "roster.json"; // Define the file path for saving/loading
 
     public TeamRosterGUI() {
         this.roster = new Roster(); // Or loadRosterFromFile(); if you're loading from a file
@@ -18,12 +17,14 @@ public class TeamRosterGUI {
     private void initializeUI() {
         frame = new JFrame("Team Roster Manager");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 400);
+        frame.setSize(1600, 800);
         frame.setLayout(new BorderLayout());
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        
+        // Set background color of the frame
+        frame.getContentPane().setBackground(Color.BLUE.darker());
+
 
         tabbedPane = new JTabbedPane();
 
@@ -33,12 +34,19 @@ public class TeamRosterGUI {
         // Player List Tab
         teamListModel = new DefaultListModel<>();
         teamList = new JList<>(teamListModel);
+
+        // Set font size of the player list
+        teamList.setFont(new Font("Times", Font.PLAIN, 18));
+
         JScrollPane scrollPane = new JScrollPane(teamList);
         tabbedPane.addTab("Player List", scrollPane);
 
         // Overall Statistics Tab
         JPanel statisticsPanel = new JPanel();
+        statisticsPanel.setBackground(Color.LIGHT_GRAY); // Set background color of statistics panel
         statisticsPanel.add(new JLabel("Overall Statistics:")); // Placeholder for actual statistics
+        statisticsPanel.setForeground(Color.BLUE); // Set text color
+        statisticsPanel.setFont(new Font("Arial", Font.BOLD, 16)); // Set font and size
         tabbedPane.addTab("Statistics", statisticsPanel);
 
         frame.add(tabbedPane, BorderLayout.CENTER);
@@ -91,11 +99,33 @@ public class TeamRosterGUI {
 
     private JPanel createControlPanel() {
         JPanel panel = new JPanel();
+        panel.setBackground(Color.WHITE); // Set background color of control panel
+
+        // Use BorderLayout for the panel
+        panel.setLayout(new BorderLayout());
+
+
         JButton addButton = new JButton("Add");
         JButton editButton = new JButton("Edit");
         JButton deleteButton = new JButton("Delete");
     
+        // Set font for buttons
+        Font buttonFont = new Font("Times", Font.BOLD, 14);
+        addButton.setFont(buttonFont);
+        editButton.setFont(buttonFont);
+        deleteButton.setFont(buttonFont);
+
+        // Set background color for buttons
+        addButton.setBackground(Color.WHITE);
+        editButton.setBackground(Color.WHITE);
+        deleteButton.setBackground(Color.WHITE);
+
+        // Set foreground color for buttons
+        addButton.setForeground(Color.BLACK.darker());
+        editButton.setForeground(Color.BLACK.darker());
+        deleteButton.setForeground(Color.BLACK.darker());
     
+
         addButton.addActionListener(e -> {
             PlayerFormDialog addDialog = new PlayerFormDialog(frame);
             addDialog.setVisible(true);
@@ -145,10 +175,13 @@ public class TeamRosterGUI {
             }
         });
         
-    
-        panel.add(addButton);
-        panel.add(editButton);
-        panel.add(deleteButton);
+        JPanel addEditPanel = new JPanel();
+        addEditPanel.setBackground(Color.WHITE);
+        addEditPanel.add(addButton);
+        addEditPanel.add(editButton);
+
+        panel.add(deleteButton, BorderLayout.EAST);
+        panel.add(addEditPanel, BorderLayout.WEST);
     
         return panel;
     }
