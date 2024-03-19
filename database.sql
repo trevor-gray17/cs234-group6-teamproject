@@ -9,5 +9,5 @@ Create table if not exists Player (
     int year
     PRIMARY KEY (name, number),
 );
-Create table if not exists Stats_1 (int threePointersTaken,int threePointersMade, int freeThrowsTaken , Select name from Player , Date practice_date, PRIMARY KEYS(name,practice_date));
+Create table if not exists Stats_1 (int threePointersTaken,int threePointersMade, int freeThrowsTaken , Select name from Player , Date practice_date);
 

@@ -30,7 +30,7 @@ public class TeamRosterGUI {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        frame.getContentPane().setBackground(Color.BLUE.darker());
+        frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 
 
         
@@ -47,9 +47,9 @@ public class TeamRosterGUI {
 
         ;
         PlayerTable = new JTable(playerList, columnNames);
-        PlayerTable.setBackground(Color.BLUE.darker());
+        PlayerTable.setBackground(Color.LIGHT_GRAY);
         PlayerTable.setFont(new Font("Times", Font.PLAIN, 25));
-        PlayerTable.setForeground(Color.WHITE);
+        PlayerTable.setForeground(Color.BLACK);
         PlayerTable.setRowHeight(30);
         PlayerTable.setCellSelectionEnabled(true);
 
@@ -68,9 +68,9 @@ public class TeamRosterGUI {
         }
         StatisticsTable = new JTable(playerStats, statColumnNames);
 
-        StatisticsTable.setBackground(Color.BLUE.darker());
+        StatisticsTable.setBackground(Color.LIGHT_GRAY);
         StatisticsTable.setFont(new Font("Times", Font.PLAIN, 25));
-        StatisticsTable.setForeground(Color.WHITE);
+        StatisticsTable.setForeground(Color.BLACK);
         StatisticsTable.setRowHeight(30);
         StatisticsTable.setCellSelectionEnabled(true);
 
@@ -101,21 +101,34 @@ public class TeamRosterGUI {
         Font buttonFont = new Font("Times", Font.BOLD, 14);
         JButton addButton = new JButton("Add");
         JButton saveButton = new JButton("Save");
+        JButton deleteButton = new JButton("Delete");
+
         addButton.setFont(buttonFont);
         saveButton.setFont(buttonFont);
+        deleteButton.setFont(buttonFont);
+
 
         addButton.setBackground(Color.WHITE);
         saveButton.setBackground(Color.WHITE);
+        deleteButton.setBackground(Color.WHITE);
+        
+
 
         // Set foreground color for buttons
         addButton.setForeground(Color.BLACK.darker());
         saveButton.setForeground(Color.BLACK.darker());
+        deleteButton.setForeground(Color.BLACK.darker());
+
+
+
+        // Set foreground color for buttons
 
 
     
     
         addButton.addActionListener(e -> {
 
+            //Player data
             for (int i = 0; i < playerList.length; i++) {
                 for (int j = 0; j < 4; j++) {
                     playerList[i][j] = PlayerTable.getValueAt(i, j).toString();
@@ -207,10 +220,19 @@ public class TeamRosterGUI {
             //Statistics
 
         });
+        deleteButton.addActionListener(e -> {
+            //Roster
+            
+
+            //Statistics
+
+        });
         
     
         panel.add(addButton);
         panel.add(saveButton);
+        panel.add(deleteButton);
+
     
         return panel;
     }
