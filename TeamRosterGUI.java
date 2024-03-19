@@ -1,13 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
 
+import javax.swing.table.DefaultTableModel;
+
 
 public class TeamRosterGUI {
     private JFrame frame;
-    private DefaultListModel<String> teamListModel;
-    private JList<String> teamList;
+    private JTable PlayerTable;
+    private JTable StatisticsTable;
+
+    private String[][] playerList;
+    private String[][] playerStats;
+
+
     private JTabbedPane tabbedPane;
     private Roster roster; // Assume Roster is defined somewhere
+    private static final String FILE_PATH = "roster.json"; // Define the file path for saving/loading
 
     public TeamRosterGUI() {
         this.roster = new Roster(); // Or loadRosterFromFile(); if you're loading from a file
@@ -22,33 +30,56 @@ public class TeamRosterGUI {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Set background color of the frame
         frame.getContentPane().setBackground(Color.BLUE.darker());
 
 
+        
+        
+
         tabbedPane = new JTabbedPane();
 
-        teamListModel = new DefaultListModel<>();
-        updateTeamList(); // Update the team list based on loaded roster
+        //player Table tab
+        String[] columnNames = {"Name", "Number", "Year", "Active"};
+        playerList = new String[1][4];
+        for (int i = 0; i < 4; i++) {
+            playerList[0][i] = "";
+        }
 
-        // Player List Tab
-        teamListModel = new DefaultListModel<>();
-        teamList = new JList<>(teamListModel);
+        ;
+        PlayerTable = new JTable(playerList, columnNames);
+        PlayerTable.setBackground(Color.BLUE.darker());
+        PlayerTable.setFont(new Font("Times", Font.PLAIN, 25));
+        PlayerTable.setForeground(Color.WHITE);
+        PlayerTable.setRowHeight(30);
+        PlayerTable.setCellSelectionEnabled(true);
 
-        // Set font size of the player list
-        teamList.setFont(new Font("Times", Font.PLAIN, 18));
+        JScrollPane tablePane = new JScrollPane(PlayerTable);
 
-        JScrollPane scrollPane = new JScrollPane(teamList);
-        tabbedPane.addTab("Player List", scrollPane);
+
+        tabbedPane.addTab("Roster", tablePane);
+
+///* 
+        // Statistics Tab
+        String[] statColumnNames = {"Name", "Free Throws Made", "Free Throws Attempted", 
+        "Three Pointers Made", "Three Pointers Attempted"};
+        playerStats = new String[1][5];
+        for (int i = 1; i < 5; i++) {
+            playerStats[0][i] = "";
+        }
+        StatisticsTable = new JTable(playerStats, statColumnNames);
+
+        StatisticsTable.setBackground(Color.BLUE.darker());
+        StatisticsTable.setFont(new Font("Times", Font.PLAIN, 25));
+        StatisticsTable.setForeground(Color.WHITE);
+        StatisticsTable.setRowHeight(30);
+        StatisticsTable.setCellSelectionEnabled(true);
+
+        JScrollPane statsPane = new JScrollPane(StatisticsTable);
+
+        tabbedPane.addTab("Statistics", statsPane);
+//*/
 
         // Overall Statistics Tab
-        JPanel statisticsPanel = new JPanel();
-        statisticsPanel.setBackground(Color.LIGHT_GRAY); // Set background color of statistics panel
-        statisticsPanel.add(new JLabel("Overall Statistics:")); // Placeholder for actual statistics
-        statisticsPanel.setForeground(Color.BLUE); // Set text color
-        statisticsPanel.setFont(new Font("Arial", Font.BOLD, 16)); // Set font and size
-        tabbedPane.addTab("Statistics", statisticsPanel);
-
         frame.add(tabbedPane, BorderLayout.CENTER);
         JPanel controlPanel = createControlPanel();
         frame.add(controlPanel, BorderLayout.SOUTH);
@@ -59,129 +90,127 @@ public class TeamRosterGUI {
         // Dropdown for player selection in Statistics
         final JComboBox<String> cb = new JComboBox<String>();
     }
-
-
-    private void editSelectedPlayer() {
-        String selectedPlayerName = teamList.getSelectedValue();
-        if (selectedPlayerName != null) {
-            // Find the player in the roster. This requires a method in Roster to find a player by name.
-            BasketballPlayer playerToEdit = roster.getPlayerByName(selectedPlayerName);
-            if (playerToEdit != null) {
-                PlayerFormDialog editDialog = new PlayerFormDialog(frame, playerToEdit);
-                editDialog.setVisible(true);
-                if (editDialog.isSaved()) {
-                    // Update the player's details with the values from the dialog.
-                    playerToEdit.setName(editDialog.getPlayerName());
-                    playerToEdit.setNumber(Integer.parseInt(editDialog.getNumber()));
-                    playerToEdit.setPosition(editDialog.getPosition());
-                    playerToEdit.setYear(Integer.parseInt(editDialog.getYear()));
-                    playerToEdit.setActive(editDialog.getActive());
-
-    
-                    // Refresh the team list to reflect the updated player details.
-                    updateTeamList();
-                }
-            }
-        }
-    }
     
 
     private void updateTeamList() {
-        teamListModel.clear();
-        for (BasketballPlayer player : roster.getPlayers().values()) {
-            // Here, you can access each player object
-            // For example, to update the team list in the GUI:
-            teamListModel.clear();
-            teamListModel.addElement(player.getName());
-
-        }
+       
     }
 
     private JPanel createControlPanel() {
         JPanel panel = new JPanel();
-        panel.setBackground(Color.WHITE); // Set background color of control panel
-
-        // Use BorderLayout for the panel
-        panel.setLayout(new BorderLayout());
-
-
-        JButton addButton = new JButton("Add");
-        JButton editButton = new JButton("Edit");
-        JButton deleteButton = new JButton("Delete");
-    
-        // Set font for buttons
         Font buttonFont = new Font("Times", Font.BOLD, 14);
+        JButton addButton = new JButton("Add");
+        JButton saveButton = new JButton("Save");
         addButton.setFont(buttonFont);
-        editButton.setFont(buttonFont);
-        deleteButton.setFont(buttonFont);
+        saveButton.setFont(buttonFont);
 
-        // Set background color for buttons
         addButton.setBackground(Color.WHITE);
-        editButton.setBackground(Color.WHITE);
-        deleteButton.setBackground(Color.WHITE);
+        saveButton.setBackground(Color.WHITE);
 
         // Set foreground color for buttons
         addButton.setForeground(Color.BLACK.darker());
-        editButton.setForeground(Color.BLACK.darker());
-        deleteButton.setForeground(Color.BLACK.darker());
-    
+        saveButton.setForeground(Color.BLACK.darker());
 
+
+    
+    
         addButton.addActionListener(e -> {
-            PlayerFormDialog addDialog = new PlayerFormDialog(frame);
-            addDialog.setVisible(true);
-            // After the dialog is closed, check if the save button was clicked and then add the player
-            if (addDialog.isSaved()) {
-                BasketballPlayer player = new BasketballPlayer(
-                    addDialog.getPlayerName(),
-                    Integer.parseInt(addDialog.getNumber()), // Convert String to int
-                    addDialog.getPosition(),
-                    Integer.parseInt(addDialog.getYear()), // Ensure this matches your dialog's method and data type
-                    addDialog.getActive() // Assuming there's a method to get the active status
 
-                    
-                );
-                roster.addPlayer(player); // Ensure the Roster class has this method implemented correctly
-                teamListModel.addElement(player.getName()); // Update GUI list
-            }
-        });
-    
-        editButton.addActionListener(e -> {
-            String selectedPlayerName = teamList.getSelectedValue(); // Moved inside the listener
-            if (selectedPlayerName != null) {
-                BasketballPlayer playerToEdit = roster.getPlayerByName(selectedPlayerName);
-                if (playerToEdit != null) {
-                    PlayerFormDialog editDialog = new PlayerFormDialog(frame, playerToEdit);
-                    editDialog.setVisible(true);
-                    if (editDialog.isSaved()) {
-                        playerToEdit.setName(editDialog.getPlayerName());
-                        playerToEdit.setNumber(Integer.parseInt(editDialog.getNumber()));
-                        playerToEdit.setPosition(editDialog.getPosition());
-                        playerToEdit.setYear(Integer.parseInt(editDialog.getYear()));
-                        playerToEdit.setActive(editDialog.getActive());
-                        // Assuming there's a method to update a player in Roster, call it here
-                        // This step is crucial to ensure the Roster object has the updated player details
-                        roster.updatePlayer(playerToEdit); // This method needs to be implemented in Roster
-                        updateTeamList(); // Refresh the team list to reflect the updated player details
-                    }
+            for (int i = 0; i < playerList.length; i++) {
+                for (int j = 0; j < 4; j++) {
+                    playerList[i][j] = PlayerTable.getValueAt(i, j).toString();
+            }}
+
+            String[][] copyPlayerList = playerList;
+            playerList = new String[copyPlayerList.length + 1][4];
+            
+            for (int i = 0; i < copyPlayerList.length; i++) {
+                for (int j = 0; j < 4; j++) {
+                        playerList[i][j] = copyPlayerList[i][j];
                 }
             }
+            for(int i = 0; i < 4; i++){
+                playerList[copyPlayerList.length][i] = "";
+            
+            }
+
+
+            //Statistics Add column
+
+            for (int i = 0; i < playerStats.length; i++) {
+                for (int j = 1; j < 5; j++) {
+                    playerStats[i][j] = StatisticsTable.getValueAt(i, j).toString();
+            }}
+
+            for (int i = 0; i < playerStats.length; i++) {
+                    playerStats[i][0] = PlayerTable.getValueAt(i, 0).toString();
+            }
+
+
+            String[][] copyPlayerStats = playerStats;
+            playerStats = new String[playerList.length][5];
+            
+            for (int i = 0; i < copyPlayerStats.length; i++) {
+                for (int j = 0; j < 5; j++) {
+                        playerStats[i][j] = copyPlayerStats[i][j];
+                }
+            }
+            for(int i = 0; i < 5; i++){
+                playerStats[copyPlayerStats.length][i] = "";
+            
+            }
+
+
+
+                  
+             
+            PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Year", "Active"}));
+            StatisticsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
+            "Three Pointers Made", "Three Pointers Attempted"}));
+
+
+            // After the dialog is closed, check if the save button was clicked and then add the player
+
         });
 
-        deleteButton.addActionListener(e -> {
-            String selectedPlayerName = teamList.getSelectedValue();
-            if (selectedPlayerName != null) {
-                roster.removePlayer(selectedPlayerName); // Assuming there's a method to remove a player by name
-                updateTeamList(); // Refresh the team list to reflect the updated player details
+
+        saveButton.addActionListener(e -> {
+            //Roster
+            for (int i = 0; i < playerList.length; i++) {
+                for (int j = 0; j < 4; j++) {
+                    playerList[i][j] = PlayerTable.getValueAt(i, j).toString();
+                    if(playerList[i][j].toString() == "")
+                        playerList[i][j] = "NA";
+                }
             }
+            for (int i = 0; i < playerList.length; i++) {
+                playerStats[i][0] = playerList[i][0];
+
+            }    
+            for (int i = 0; i < playerStats.length; i++) {
+                for (int j = 1; j < 5; j++) {
+                    playerStats[i][j] = StatisticsTable.getValueAt(i, j).toString();
+                    if(playerStats[i][j].toString() == "")
+                        playerStats[i][j] = "NA";
+                }
+            }
+            for (int i = 0; i < playerStats.length; i++) {
+                playerStats[i][0] = playerList[i][0];
+        }
+
+
+            PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Year", "Active"}));
+            StatisticsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
+            "Three Pointers Made", "Three Pointers Attempted"}));
+
+
+            //Statistics
+
         });
         
-        JPanel addEditPanel = new JPanel();
-        addEditPanel.setBackground(Color.WHITE);
-        addEditPanel.add(addButton);
-        addEditPanel.add(editButton);
-
-        panel.add(deleteButton, BorderLayout.EAST);
-        panel.add(addEditPanel, BorderLayout.WEST);
+    
+        panel.add(addButton);
+        panel.add(saveButton);
     
         return panel;
     }
