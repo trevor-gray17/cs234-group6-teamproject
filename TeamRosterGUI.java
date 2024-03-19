@@ -101,21 +101,34 @@ public class TeamRosterGUI {
         Font buttonFont = new Font("Times", Font.BOLD, 14);
         JButton addButton = new JButton("Add");
         JButton saveButton = new JButton("Save");
+        JButton deleteButton = new JButton("Delete");
+
         addButton.setFont(buttonFont);
         saveButton.setFont(buttonFont);
+        deleteButton.setFont(buttonFont);
+
 
         addButton.setBackground(Color.WHITE);
         saveButton.setBackground(Color.WHITE);
+        deleteButton.setBackground(Color.WHITE);
+        
+
 
         // Set foreground color for buttons
         addButton.setForeground(Color.BLACK.darker());
         saveButton.setForeground(Color.BLACK.darker());
+        deleteButton.setForeground(Color.BLACK.darker());
+
+
+
+        // Set foreground color for buttons
 
 
     
     
         addButton.addActionListener(e -> {
 
+            //Player data
             for (int i = 0; i < playerList.length; i++) {
                 for (int j = 0; j < 4; j++) {
                     playerList[i][j] = PlayerTable.getValueAt(i, j).toString();
@@ -207,10 +220,19 @@ public class TeamRosterGUI {
             //Statistics
 
         });
+        deleteButton.addActionListener(e -> {
+            //Roster
+            
+
+            //Statistics
+
+        });
         
     
         panel.add(addButton);
         panel.add(saveButton);
+        panel.add(deleteButton);
+
     
         return panel;
     }
