@@ -6,5 +6,10 @@ Create table if not exists Player (
     Boolean active,
     int year,
 );
-Create table if not exists Stats_1 (int threePointersTaken,int threePointersMade, int freeThrowsTaken , Select name from Player , Date practice_date);
+Create table if not exists Stats_1 (
+    int threePointersTaken,
+    int threePointersMade, 
+    int freeThrowsTaken , 
+    Select name from Player , 
+    Date practice_date);
 
