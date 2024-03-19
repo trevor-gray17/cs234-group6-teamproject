@@ -30,7 +30,7 @@ public class TeamRosterGUI {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        frame.getContentPane().setBackground(Color.BLUE.darker());
+        frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 
 
         
@@ -47,9 +47,9 @@ public class TeamRosterGUI {
 
         ;
         PlayerTable = new JTable(playerList, columnNames);
-        PlayerTable.setBackground(Color.BLUE.darker());
+        PlayerTable.setBackground(Color.LIGHT_GRAY);
         PlayerTable.setFont(new Font("Times", Font.PLAIN, 25));
-        PlayerTable.setForeground(Color.WHITE);
+        PlayerTable.setForeground(Color.BLACK);
         PlayerTable.setRowHeight(30);
         PlayerTable.setCellSelectionEnabled(true);
 
@@ -68,9 +68,9 @@ public class TeamRosterGUI {
         }
         StatisticsTable = new JTable(playerStats, statColumnNames);
 
-        StatisticsTable.setBackground(Color.BLUE.darker());
+        StatisticsTable.setBackground(Color.LIGHT_GRAY);
         StatisticsTable.setFont(new Font("Times", Font.PLAIN, 25));
-        StatisticsTable.setForeground(Color.WHITE);
+        StatisticsTable.setForeground(Color.BLACK);
         StatisticsTable.setRowHeight(30);
         StatisticsTable.setCellSelectionEnabled(true);
 
