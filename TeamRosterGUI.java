@@ -196,6 +196,7 @@ public class TeamRosterGUI {
                         playerList[i][j] = "NA";
                 }
             }
+
             for (int i = 0; i < playerList.length; i++) {
                 playerStats[i][0] = playerList[i][0];
 
@@ -221,10 +222,47 @@ public class TeamRosterGUI {
 
         });
         deleteButton.addActionListener(e -> {
-            //Roster
-            
+            int row = PlayerTable.getSelectedRow();
+            if (row >= 0) {
+                DefaultTableModel model1 = (DefaultTableModel) PlayerTable.getModel();
+                DefaultTableModel model2 = (DefaultTableModel) StatisticsTable.getModel();
 
-            //Statistics
+                model1.removeRow(row);
+                model2.removeRow(row);
+
+            }
+            int row2 = StatisticsTable.getSelectedRow();
+            if (row2 >= 0) {
+                DefaultTableModel model1 = (DefaultTableModel) StatisticsTable.getModel();
+                DefaultTableModel model2 = (DefaultTableModel) PlayerTable.getModel();
+                model1.removeRow(row2);
+                model2.removeRow(row2);
+
+            }
+            //Player data
+
+            String[][] copyPlayerList = playerList;
+            playerList = new String[copyPlayerList.length - 1][4];
+            
+            for (int i = 0; i < playerList.length; i++) {
+                for (int j = 0; j < 4; j++) {
+                        playerList[i][j] = copyPlayerList[i][j];
+                }
+            }
+
+
+            //Statistics Add column
+
+
+            String[][] copyPlayerStats = playerStats;
+            playerStats = new String[playerList.length][5];
+            
+            for (int i = 0; i < playerStats.length; i++) {
+                for (int j = 0; j < 5; j++) {
+                        playerStats[i][j] = copyPlayerStats[i][j];
+                }
+            }
+
 
         });
         
