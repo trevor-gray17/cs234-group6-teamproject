@@ -7,7 +7,9 @@ import javax.swing.table.DefaultTableModel;
 public class TeamRosterGUI {
     private JFrame frame;
     private JTable PlayerTable;
-    private JTable StatisticsTable;
+    private JTable PlayerStatsTable;
+    private JTable ByDateTable;
+
 
     private String[][] playerList;
     private String[][] playerStats;
@@ -64,17 +66,17 @@ public class TeamRosterGUI {
         for (int i = 1; i < 5; i++) {
             playerStats[0][i] = "";
         }
-        StatisticsTable = new JTable(playerStats, statColumnNames);
+        PlayerStatsTable = new JTable(playerStats, statColumnNames);
 
-        StatisticsTable.setBackground(Color.LIGHT_GRAY);
-        StatisticsTable.setFont(new Font("Times", Font.PLAIN, 25));
-        StatisticsTable.setForeground(Color.BLACK);
-        StatisticsTable.setRowHeight(30);
-        StatisticsTable.setCellSelectionEnabled(true);
+        PlayerStatsTable.setBackground(Color.LIGHT_GRAY);
+        PlayerStatsTable.setFont(new Font("Times", Font.PLAIN, 25));
+        PlayerStatsTable.setForeground(Color.BLACK);
+        PlayerStatsTable.setRowHeight(30);
+        PlayerStatsTable.setCellSelectionEnabled(true);
 
-        JScrollPane statsPane = new JScrollPane(StatisticsTable);
+        JScrollPane statsPane = new JScrollPane(PlayerStatsTable);
 
-        tabbedPane.addTab("Statistics", statsPane);
+        tabbedPane.addTab("Player Stats", statsPane);
 
         // Overall Statistics Tab
         frame.add(tabbedPane, BorderLayout.CENTER);
@@ -84,8 +86,9 @@ public class TeamRosterGUI {
         frame.setVisible(true);
 
 
-        // Dropdown for player selection in Statistics
-        final JComboBox<String> cb = new JComboBox<String>();
+        JScrollPane datesPane = new JScrollPane(ByDateTable);
+
+        tabbedPane.addTab("Stats by Date", datesPane);
     }
     
 
@@ -140,7 +143,7 @@ public class TeamRosterGUI {
 
             for (int i = 0; i < playerStats.length; i++) {
                 for (int j = 1; j < 5; j++) {
-                    playerStats[i][j] = StatisticsTable.getValueAt(i, j).toString();
+                    playerStats[i][j] = PlayerStatsTable.getValueAt(i, j).toString();
             }}
 
             for (int i = 0; i < playerStats.length; i++) {
@@ -166,7 +169,7 @@ public class TeamRosterGUI {
                   
              
             PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Position", "Year", "Active"}));
-            StatisticsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
+            PlayerStatsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
             "Three Pointers Made", "Three Pointers Attempted"}));
 
 
@@ -191,7 +194,7 @@ public class TeamRosterGUI {
             }    
             for (int i = 0; i < playerStats.length; i++) {
                 for (int j = 1; j < 5; j++) {
-                    playerStats[i][j] = StatisticsTable.getValueAt(i, j).toString();
+                    playerStats[i][j] = PlayerStatsTable.getValueAt(i, j).toString();
                     if(playerStats[i][j].toString() == "")
                         playerStats[i][j] = "NA";
                 }
@@ -202,7 +205,7 @@ public class TeamRosterGUI {
 
 
             PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Position", "Year", "Active"}));
-            StatisticsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
+            PlayerStatsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
             "Three Pointers Made", "Three Pointers Attempted"}));
 
 
@@ -214,13 +217,13 @@ public class TeamRosterGUI {
 
         deleteButton.addActionListener(e -> {
             int playerRow = PlayerTable.getSelectedRow();
-            int statsRow = StatisticsTable.getSelectedRow();
+            int statsRow = PlayerStatsTable.getSelectedRow();
             
             if (playerRow >= 0 || statsRow >= 0) {
                 int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this player and their statistics?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     DefaultTableModel playerTableModel = (DefaultTableModel) PlayerTable.getModel();
-                    DefaultTableModel statsTableModel = (DefaultTableModel) StatisticsTable.getModel();
+                    DefaultTableModel statsTableModel = (DefaultTableModel) PlayerStatsTable.getModel();
                     
                     if (playerRow >= 0) {
                         playerTableModel.removeRow(playerRow);
