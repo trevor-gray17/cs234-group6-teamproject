@@ -39,9 +39,9 @@ public class TeamRosterGUI {
         tabbedPane = new JTabbedPane();
 
         //player Table tab
-        String[] columnNames = {"Name", "Number", "Year", "Active"};
-        playerList = new String[1][4];
-        for (int i = 0; i < 4; i++) {
+        String[] columnNames = {"Name", "Number","Position", "Year", "Active"};
+        playerList = new String[1][5];
+        for (int i = 0; i < 5; i++) {
             playerList[0][i] = "";
         }
 
@@ -130,19 +130,19 @@ public class TeamRosterGUI {
 
             //Player data
             for (int i = 0; i < playerList.length; i++) {
-                for (int j = 0; j < 4; j++) {
+                for (int j = 0; j < 5; j++) {
                     playerList[i][j] = PlayerTable.getValueAt(i, j).toString();
             }}
 
             String[][] copyPlayerList = playerList;
-            playerList = new String[copyPlayerList.length + 1][4];
+            playerList = new String[copyPlayerList.length + 1][5];
             
             for (int i = 0; i < copyPlayerList.length; i++) {
-                for (int j = 0; j < 4; j++) {
+                for (int j = 0; j < 5; j++) {
                         playerList[i][j] = copyPlayerList[i][j];
                 }
             }
-            for(int i = 0; i < 4; i++){
+            for(int i = 0; i < 5; i++){
                 playerList[copyPlayerList.length][i] = "";
             
             }
@@ -177,7 +177,7 @@ public class TeamRosterGUI {
 
                   
              
-            PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Year", "Active"}));
+            PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Position", "Year", "Active"}));
             StatisticsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
             "Three Pointers Made", "Three Pointers Attempted"}));
 
@@ -190,7 +190,7 @@ public class TeamRosterGUI {
         saveButton.addActionListener(e -> {
             //Roster
             for (int i = 0; i < playerList.length; i++) {
-                for (int j = 0; j < 4; j++) {
+                for (int j = 0; j < 5; j++) {
                     playerList[i][j] = PlayerTable.getValueAt(i, j).toString();
                     if(playerList[i][j].toString() == "")
                         playerList[i][j] = "NA";
@@ -213,13 +213,13 @@ public class TeamRosterGUI {
         }
 
 
-            PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Year", "Active"}));
+            PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Position", "Year", "Active"}));
             StatisticsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
             "Three Pointers Made", "Three Pointers Attempted"}));
 
 
             //Statistics
-
+            
         });
         deleteButton.addActionListener(e -> {
             int row = PlayerTable.getSelectedRow();
@@ -245,7 +245,7 @@ public class TeamRosterGUI {
             playerList = new String[copyPlayerList.length - 1][4];
             
             for (int i = 0; i < playerList.length; i++) {
-                for (int j = 0; j < 4; j++) {
+                for (int j = 0; j < 5; j++) {
                         playerList[i][j] = copyPlayerList[i][j];
                 }
             }
