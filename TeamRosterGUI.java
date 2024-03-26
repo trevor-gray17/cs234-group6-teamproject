@@ -221,50 +221,47 @@ public class TeamRosterGUI {
             //Statistics
 
         });
-        deleteButton.addActionListener(e -> {
-            int row = PlayerTable.getSelectedRow();
-            if (row >= 0) {
-                DefaultTableModel model1 = (DefaultTableModel) PlayerTable.getModel();
-                DefaultTableModel model2 = (DefaultTableModel) StatisticsTable.getModel();
 
-                model1.removeRow(row);
-                model2.removeRow(row);
 
-            }
-            int row2 = StatisticsTable.getSelectedRow();
-            if (row2 >= 0) {
-                DefaultTableModel model1 = (DefaultTableModel) StatisticsTable.getModel();
-                DefaultTableModel model2 = (DefaultTableModel) PlayerTable.getModel();
-                model1.removeRow(row2);
-                model2.removeRow(row2);
 
-            }
-            //Player data
 
-            String[][] copyPlayerList = playerList;
-            playerList = new String[copyPlayerList.length - 1][4];
+deleteButton.addActionListener(e -> {
+    int playerRow = PlayerTable.getSelectedRow();
+    int statsRow = StatisticsTable.getSelectedRow();
+    
+    if (playerRow >= 0 || statsRow >= 0) {
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this player and their statistics?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            DefaultTableModel playerTableModel = (DefaultTableModel) PlayerTable.getModel();
+            DefaultTableModel statsTableModel = (DefaultTableModel) StatisticsTable.getModel();
             
-            for (int i = 0; i < playerList.length; i++) {
-                for (int j = 0; j < 4; j++) {
-                        playerList[i][j] = copyPlayerList[i][j];
-                }
+            if (playerRow >= 0) {
+                playerTableModel.removeRow(playerRow);
+                statsTableModel.removeRow(playerRow); // Remove corresponding row from statistics table
+            }
+            if (statsRow >= 0) {
+                statsTableModel.removeRow(statsRow);
+                playerTableModel.removeRow(statsRow); // Remove corresponding row from player table
             }
 
-
-            //Statistics Add column
-
-
-            String[][] copyPlayerStats = playerStats;
-            playerStats = new String[playerList.length][5];
-            
-            for (int i = 0; i < playerStats.length; i++) {
-                for (int j = 0; j < 5; j++) {
-                        playerStats[i][j] = copyPlayerStats[i][j];
+            // Update player data
+            if (playerRow >= 0) {
+                String[][] newPlayerList = new String[playerList.length - 1][4];
+                String[][] newPlayerStats = new String[playerStats.length - 1][5];
+                for (int i = 0, k = 0; i < playerList.length; i++) {
+                    if (i != playerRow) {
+                        System.arraycopy(playerList[i], 0, newPlayerList[k], 0, 4);
+                        System.arraycopy(playerStats[i], 0, newPlayerStats[k], 0, 5);
+                        k++;
+                    }
                 }
+                playerList = newPlayerList;
+                playerStats = newPlayerStats;
             }
+        }
+    }
+});
 
-
-        });
         
     
         panel.add(addButton);
