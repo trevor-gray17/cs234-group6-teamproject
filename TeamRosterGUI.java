@@ -13,6 +13,9 @@ public class TeamRosterGUI {
 
     private String[][] playerList;
     private String[][] playerStats;
+    private JComboBox<String> positionComboBox;
+    private JComboBox<String> activeComboBox;
+
 
 
     private JTabbedPane tabbedPane;
@@ -46,13 +49,26 @@ public class TeamRosterGUI {
             playerList[0][i] = "";
         }
 
-        ;
+
         PlayerTable = new JTable(playerList, columnNames);
         PlayerTable.setBackground(Color.LIGHT_GRAY);
         PlayerTable.setFont(new Font("Times", Font.PLAIN, 25));
         PlayerTable.setForeground(Color.BLACK);
         PlayerTable.setRowHeight(30);
         PlayerTable.setCellSelectionEnabled(true);
+
+        String[] positions = {"Guard", "Forward", "Center"}; // Add more positions as needed
+        String[] active = {"Yes", "No"};
+
+        positionComboBox = new JComboBox<>(positions);
+        positionComboBox.setSelectedIndex(2);
+
+        activeComboBox = new JComboBox<>(active);
+
+        PlayerTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(positionComboBox));
+        PlayerTable.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(activeComboBox));
+
+
 
         JScrollPane tablePane = new JScrollPane(PlayerTable);
 
@@ -166,10 +182,8 @@ public class TeamRosterGUI {
 
 
 
-                  
-             
             PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Position", "Year", "Active"}));
-            PlayerStatsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
+            StatisticsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
             "Three Pointers Made", "Three Pointers Attempted"}));
 
 
@@ -205,7 +219,7 @@ public class TeamRosterGUI {
 
 
             PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Position", "Year", "Active"}));
-            PlayerStatsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
+            StatisticsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
             "Three Pointers Made", "Three Pointers Attempted"}));
 
 
@@ -238,7 +252,7 @@ public class TeamRosterGUI {
                     if (playerRow >= 0) {
                         String[][] newPlayerList = new String[playerList.length - 1][5];
                         String[][] newPlayerStats = new String[playerStats.length - 1][5];
-                        for (int i = 0, k = 0; i < playerList.length; i++) {
+                        for (int i = 0, k = 0; i < newPlayerList.length; i++) {
                             if (i != playerRow) {
                                 System.arraycopy(playerList[i], 0, newPlayerList[k], 0, 5);
                                 System.arraycopy(playerStats[i], 0, newPlayerStats[k], 0, 5);
