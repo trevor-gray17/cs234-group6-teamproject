@@ -15,7 +15,6 @@ public class TeamRosterGUI {
 
     private JTabbedPane tabbedPane;
     private Roster roster; // Assume Roster is defined somewhere
-    private static final String FILE_PATH = "roster.json"; // Define the file path for saving/loading
 
     public TeamRosterGUI() {
         this.roster = new Roster(); // Or loadRosterFromFile(); if you're loading from a file
@@ -58,7 +57,6 @@ public class TeamRosterGUI {
 
         tabbedPane.addTab("Roster", tablePane);
 
-///* 
         // Statistics Tab
         String[] statColumnNames = {"Name", "Free Throws Made", "Free Throws Attempted", 
         "Three Pointers Made", "Three Pointers Attempted"};
@@ -77,7 +75,6 @@ public class TeamRosterGUI {
         JScrollPane statsPane = new JScrollPane(StatisticsTable);
 
         tabbedPane.addTab("Statistics", statsPane);
-//*/
 
         // Overall Statistics Tab
         frame.add(tabbedPane, BorderLayout.CENTER);
@@ -91,10 +88,6 @@ public class TeamRosterGUI {
         final JComboBox<String> cb = new JComboBox<String>();
     }
     
-
-    private void updateTeamList() {
-       
-    }
 
     private JPanel createControlPanel() {
         JPanel panel = new JPanel();
@@ -118,11 +111,6 @@ public class TeamRosterGUI {
         addButton.setForeground(Color.BLACK.darker());
         saveButton.setForeground(Color.BLACK.darker());
         deleteButton.setForeground(Color.BLACK.darker());
-
-
-
-        // Set foreground color for buttons
-
 
     
     
