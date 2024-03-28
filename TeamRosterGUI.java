@@ -208,6 +208,7 @@ public class TeamRosterGUI {
                 playerStats[i][0] = playerList[i][0];
 
             }    
+
             for (int i = 0; i < playerStats.length; i++) {
                 for (int j = 1; j < 5; j++) {
                     playerStats[i][j] = StatisticsTable.getValueAt(i, j).toString();
@@ -215,11 +216,12 @@ public class TeamRosterGUI {
                         playerStats[i][j] = "NA";
                 }
             }
+
             for (int i = 0; i < playerStats.length; i++) {
                 playerStats[i][0] = playerList[i][0];
         }
 
-
+        
             PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Position", "Year", "Active"}));
 
             PlayerTable.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(positionComboBox));
@@ -282,6 +284,7 @@ public class TeamRosterGUI {
     
         return panel;
     }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(TeamRosterGUI::new);
