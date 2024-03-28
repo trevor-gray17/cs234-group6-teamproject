@@ -1,13 +1,24 @@
-Create database if not exists shootingstats;
-use shootingstats;
+CREATE DATABASE IF NOT EXISTS roster;
+USE roster;
 
-Create table if not exists Player (
-    String name,
-    int number,
-    String position
-    Boolean active,
-    int year
-    PRIMARY KEY (name, number),
+CREATE TABLE IF NOT EXISTS Player (
+    PlayerID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    number INT NOT NULL,
+    position VARCHAR(255),
+    active BOOLEAN,
+    year INT,
+    UNIQUE KEY unique_player (name, number)
 );
-Create table if not exists Stats_1 (int threePointersTaken,int threePointersMade, int freeThrowsTaken , Select name from Player , Date practice_date);
 
+CREATE TABLE IF NOT EXISTS Stats_1 (
+    StatID INT AUTO_INCREMENT PRIMARY KEY,
+    threePointersTaken INT,
+    threePointersMade INT,
+    freeThrowsTaken INT,
+    freeThrowsMade INT,
+    playerName VARCHAR(255),
+    practice_date DATE,
+    PlayerID INT,
+    FOREIGN KEY (PlayerID) REFERENCES Player(PlayerID) ON DELETE CASCADE
+);
