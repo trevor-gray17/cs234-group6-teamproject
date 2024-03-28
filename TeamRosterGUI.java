@@ -183,7 +183,7 @@ public class TeamRosterGUI {
 
 
             PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Position", "Year", "Active"}));
-            StatisticsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
+            PlayerStatsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
             "Three Pointers Made", "Three Pointers Attempted"}));
 
 
@@ -219,7 +219,7 @@ public class TeamRosterGUI {
 
 
             PlayerTable.setModel(new DefaultTableModel(playerList, new String[]{"Name", "Number", "Position", "Year", "Active"}));
-            StatisticsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
+            PlayerStatsTable.setModel(new DefaultTableModel(playerStats, new String[]{"Name", "Free Throws Made", "Free Throws Attempted", 
             "Three Pointers Made", "Three Pointers Attempted"}));
 
 
