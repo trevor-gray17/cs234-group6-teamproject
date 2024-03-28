@@ -1,46 +1,67 @@
-class ShootingStatistics {
-    private double fieldGoalPercentage;
-    private double threePointPercentage;
-    private double freeThrowPercentage;
+public class ShootingStatistics {
+    private int threePointersTaken;
+    private int threePointersMade;
+    private int freeThrowsTaken;
+    private int freeThrowsMade;
 
-    public ShootingStatistics(double fieldGoalPercentage, double threePointPercentage, double freeThrowPercentage) {
-        this.fieldGoalPercentage = fieldGoalPercentage;
-        this.threePointPercentage = threePointPercentage;
-        this.freeThrowPercentage = freeThrowPercentage;
+    public ShootingStatistics(int threePointersTaken, int threePointersMade, int freeThrowsTaken, int freeThrowsMade) {
+        this.threePointersTaken = threePointersTaken;
+        this.threePointersMade = threePointersMade;
+        this.freeThrowsTaken = freeThrowsTaken;
+        this.freeThrowsMade = freeThrowsMade;
     }
 
-    public double getFieldGoalPercentage() {
-        return fieldGoalPercentage;
+    public int getThreePointersTaken() {
+        return threePointersTaken;
     }
 
-    public double getThreePointPercentage() {
-        return threePointPercentage;
+    public void setThreePointersTaken(int threePointersTaken) {
+        this.threePointersTaken = threePointersTaken;
     }
 
-    public double getFreeThrowPercentage() {
-        return freeThrowPercentage;
+    public int getThreePointersMade() {
+        return threePointersMade;
     }
 
-    public void setFieldGoalPercentage(double fieldGoalPercentage) {
-        this.fieldGoalPercentage = fieldGoalPercentage;
+    public void setThreePointersMade(int threePointersMade) {
+        this.threePointersMade = threePointersMade;
     }
 
-    public void setThreePointPercentage(double threePointPercentage) {
-        this.threePointPercentage = threePointPercentage;
+    public int getFreeThrowsTaken() {
+        return freeThrowsTaken;
     }
 
-    public void setFreeThrowPercentage(double freeThrowPercentage) {
-        this.freeThrowPercentage = freeThrowPercentage;
+    public void setFreeThrowsTaken(int freeThrowsTaken) {
+        this.freeThrowsTaken = freeThrowsTaken;
+    }
+
+    public int getFreeThrowsMade() {
+        return freeThrowsMade;
+    }
+
+    public void setFreeThrowsMade(int freeThrowsMade) {
+        this.freeThrowsMade = freeThrowsMade;
+    }
+
+    // Calculate and return the free throw percentage
+    public double calculateFreeThrowPercentage() {
+        if (freeThrowsTaken == 0) return 0;
+        return ((double) freeThrowsMade / freeThrowsTaken) * 100;
+    }
+
+    // Calculate and return the three-point percentage
+    public double calculateThreePointPercentage() {
+        if (threePointersTaken == 0) return 0;
+        return ((double) threePointersMade / threePointersTaken) * 100;
     }
 
     @Override
     public String toString() {
         return "ShootingStatistics{" +
-                "fieldGoalPercentage=" + fieldGoalPercentage +
-                ", threePointPercentage=" + threePointPercentage +
-                ", freeThrowPercentage=" + freeThrowPercentage +
+                "threePointersTaken=" + threePointersTaken +
+                ", threePointersMade=" + threePointersMade +
+                ", freeThrowsTaken=" + freeThrowsTaken +
+                ", freeThrowsMade=" + freeThrowsMade +
                 '}';
     }
-
-    
 }
