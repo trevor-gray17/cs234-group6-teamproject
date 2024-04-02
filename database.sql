@@ -3,12 +3,11 @@ USE roster;
 
 CREATE TABLE IF NOT EXISTS Player (
     PlayerID INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) UNIQUE NOT NULL,
     number INT NOT NULL,
-    position VARCHAR(255),
+    position VARCHAR(50),
     active BOOLEAN,
     year INT,
-    UNIQUE KEY unique_player (name, number)
 );
 
 CREATE TABLE IF NOT EXISTS Stats_1 (

@@ -204,7 +204,6 @@ public class TeamRosterGUI {
 
 
 
-
             DayStatsTable.setModel(new DefaultTableModel(dayStats, new String[]{"Date", "Number","Name", "Free Throws Made", "Free Throws Attempted",
                 "Three Pointers Made", "Three Pointers Attempted"}));
 
@@ -213,6 +212,7 @@ public class TeamRosterGUI {
 
 
             PlayerStatsTable.setModel(new DefaultTableModel(playerStats, new String[] {"Number", "Name", "Free Throws %", "Three Pointers %"}));
+
 
 
             // After the dialog is closed, check if the save button was clicked and then add the player
@@ -310,6 +310,7 @@ public class TeamRosterGUI {
         }
 
         
+
         for (int i = 0; i < (dayStats.length/playerList.length); i++) {
             for(int j = 0; j < playerList.length; j++){
                 dayStats[j + (playerList.length * i)][1] = playerList[j][0];
@@ -318,7 +319,7 @@ public class TeamRosterGUI {
 
         }
 
-        if(DayStatsTable.getSize().equals(0)){
+        if(!DayStatsTable.getSize().equals(0)){
             for (int i = 0; i < dayStats.length; i++) {
                 for (int j = 0; j < 7; j++) {
                     dayStats[i][j] = DayStatsTable.getValueAt(i, j).toString();
