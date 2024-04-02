@@ -10,12 +10,10 @@ class BasketballPlayer {
     private int year;
     private Map<String, ShootingStatistics> shootingStats;
 
-    public BasketballPlayer(String name, int number, String position, int year, Boolean active) {
+    public BasketballPlayer(String name, int number, int year) {
         this.name = name;
         this.number = number;
-        this.position = position;
         this.year = year;
-        this.active = active;
 
         this.shootingStats = new HashMap<>();
     }
@@ -48,23 +46,6 @@ class BasketballPlayer {
         this.number = number;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public Boolean getActive() {
-        return active;
-
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
     public Map<String, ShootingStatistics> getShootingStats() {
         return shootingStats;
     }
@@ -80,8 +61,6 @@ class BasketballPlayer {
         return "BasketballPlayer{" +
                 "name='" + name + '\'' +
                 ", number=" + number +
-                ", position='" + position + '\'' +
-                ", active=" + active +
                 ", shootingStats=" + shootingStats +
                 '}';
     }

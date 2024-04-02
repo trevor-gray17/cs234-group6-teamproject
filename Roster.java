@@ -44,7 +44,7 @@ public class Roster {
         Connection conn = null;
         try {
             // Replace with your database details
-            String url = "jdbc:mysql://localhost:3306/roster?user=root&password=tape230311170G";
+            String url = "jdbc:mysql://localhost:3306/roster?user=root&password=Jillrusso";
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -54,7 +54,7 @@ public class Roster {
     
 
 public void saveRosterToDB() {
-    String insertPlayerSQL = "INSERT INTO Player(name, number, position, active, year) VALUES(?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE position=VALUES(position), active=VALUES(active), year=VALUES(year);";
+    String insertPlayerSQL = "INSERT INTO Player(number, name, year) VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE year=VALUES(year);";
     String insertStatSQL = "INSERT INTO Stats_1(threePointersTaken, threePointersMade, freeThrowsTaken, freeThrowsMade, playerName, practice_date, PlayerID) VALUES(?, ?, ?, ?, ?, ?, ?);";
     String selectPlayerIDSQL = "SELECT PlayerID FROM Player WHERE name = ? AND number = ?;";
 
@@ -67,8 +67,6 @@ public void saveRosterToDB() {
             // Insert or update player
             pstmtPlayer.setString(1, player.getName());
             pstmtPlayer.setInt(2, player.getNumber());
-            pstmtPlayer.setString(3, player.getPosition());
-            pstmtPlayer.setBoolean(4, player.getActive());
             pstmtPlayer.setInt(5, player.getYear());
             pstmtPlayer.executeUpdate();
 
@@ -119,9 +117,7 @@ public void loadRosterFromDB() {
             BasketballPlayer player = new BasketballPlayer(
                 rsPlayers.getString("name"),
                 rsPlayers.getInt("number"),
-                rsPlayers.getString("position"),
-                rsPlayers.getInt("year"),
-                rsPlayers.getBoolean("active")
+                rsPlayers.getInt("year")
             );
 
             long playerID = rsPlayers.getLong("PlayerID");

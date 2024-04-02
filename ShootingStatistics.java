@@ -1,4 +1,5 @@
 public class ShootingStatistics {
+
     private int threePointersTaken;
     private int threePointersMade;
     private int freeThrowsTaken;
