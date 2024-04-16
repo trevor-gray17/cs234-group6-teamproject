@@ -218,8 +218,8 @@ public class TeamRosterGUI {
     private JPanel createControlPanel() {
         JPanel panel = new JPanel();
         Font buttonFont = new Font("Times", Font.BOLD, 14);
-        JButton addButton = new JButton("Add");
-        JButton saveButton = new JButton("Save");
+        JButton addButton = new JButton("Add Player");
+        JButton saveButton = new JButton("Save Changes");
         JButton deleteButton = new JButton("Delete");
         JButton addDayButton = new JButton("Add Day");
 
