@@ -5,16 +5,13 @@ import java.util.Map;
 class BasketballPlayer {
     private String name;
     private int number;
-    private String position;
-    private Boolean active;
     private int year;
     private Map<String, ShootingStatistics> shootingStats;
 
-    public BasketballPlayer(String name, int number, int year) {
+    public BasketballPlayer(int number, String name, int year){
         this.name = name;
         this.number = number;
         this.year = year;
-
         this.shootingStats = new HashMap<>();
     }
 
@@ -52,6 +49,7 @@ class BasketballPlayer {
 
     public void setShootingStats(Map<String, ShootingStatistics> shootingStats) {
         this.shootingStats = shootingStats;
+        this.shootingStats.replace(name, shootingStats.get(shootingStats));
     }
 
     

@@ -1,15 +1,15 @@
 public class ShootingStatistics {
 
-    private int threePointersTaken;
-    private int threePointersMade;
-    private int freeThrowsTaken;
-    private int freeThrowsMade;
+    private int threePointersTaken = 0;
+    private int threePointersMade = 0;
+    private int freeThrowsTaken = 0;
+    private int freeThrowsMade = 0;
 
     public ShootingStatistics(int threePointersTaken, int threePointersMade, int freeThrowsTaken, int freeThrowsMade) {
-        this.threePointersTaken = threePointersTaken;
-        this.threePointersMade = threePointersMade;
-        this.freeThrowsTaken = freeThrowsTaken;
-        this.freeThrowsMade = freeThrowsMade;
+        this.threePointersTaken += threePointersTaken;
+        this.threePointersMade += threePointersMade;
+        this.freeThrowsTaken += freeThrowsTaken;
+        this.freeThrowsMade += freeThrowsMade;
     }
 
     public int getThreePointersTaken() {
@@ -46,7 +46,7 @@ public class ShootingStatistics {
 
     // Calculate and return the free throw percentage
     public double calculateFreeThrowPercentage() {
-        if (freeThrowsTaken == 0) return 0;
+        if (getFreeThrowsTaken() == 0) return 0;
         return ((double) freeThrowsMade / freeThrowsTaken) * 100;
     }
 
