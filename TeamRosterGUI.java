@@ -64,6 +64,7 @@ public class TeamRosterGUI {
             i++;
 
         }
+
         
         
 
@@ -126,20 +127,17 @@ public class TeamRosterGUI {
         dayStats = new String[0][7];
         if(roster.getPlayers().size() != 0){
             int numPracticeDates = roster.getPlayers().get(playerList[0][1]).getShootingStats().size();
-            dayStats = new String[roster.getPlayers().size() * 2][7];
-            //System.out.println("Num Practice Dates * roster.getPlayers().size(): " + roster.getPlayers().size() * 2);
+            dayStats = new String[roster.getPlayers().size() * numPracticeDates][7];
+            System.out.println("Num Practice Dates * roster.getPlayers().size(): " + roster.getPlayers().size() * numPracticeDates);
             int j = 0;
             for (int i = 0; i < roster.getPlayers().size(); i++) {
 
                 Map<String, ShootingStatistics> insertStats = roster.getPlayers().get(playerList[i][1]).getShootingStats();
-                System.out.println(insertStats);
                 for (Map.Entry<String, ShootingStatistics> entry : insertStats.entrySet()) {
-                    //System.out.println("Entry = " + entry.getValue());
                     dayStats[j][0] = entry.getKey();
                     dayStats[j][1] = playerList[i][0];
                     dayStats[j][2] = playerList[i][1];
                     dayStats[j][3] = entry.getValue().getFreeThrowsMade() + "";
-                    //System.out.println("Free throwsmade: " + i + "    person:" + entry.getValue().getFreeThrowsMade() + "");
                     dayStats[j][4] = entry.getValue().getFreeThrowsTaken() + "";
                     dayStats[j][5] = entry.getValue().getThreePointersMade() + "";
                     dayStats[j][6] = entry.getValue().getThreePointersTaken() + "";
@@ -154,10 +152,7 @@ public class TeamRosterGUI {
 
 
         for (int j = 0; j < playerStats.length; j++) {
-            System.out.println("Player = " + roster.getPlayers().get(playerStats[j][1]).getName() + " " + roster.getPlayers().get(playerStats[j][1]).getShootingStats());
 
-            //System.out.println("Free Throws = " + roster.getPlayers().get(playerStats[j][1]).getShootingStats().get(dayStats[j][0]).calculateFreeThrowPercentage());
-            //System.out.println("Three Points = " + roster.getPlayers().get(playerStats[j][1]).getShootingStats().get(dayStats[j][0]).calculateThreePointPercentage());
             playerStats[j][2] = roster.getPlayers().get(playerStats[j][1]).getShootingStats().get(dayStats[j][0]).calculateFreeThrowPercentage() + "";
             playerStats[j][3] = roster.getPlayers().get(playerStats[j][1]).getShootingStats().get(dayStats[j][0]).calculateThreePointPercentage() + "";
         }
@@ -218,8 +213,8 @@ public class TeamRosterGUI {
     private JPanel createControlPanel() {
         JPanel panel = new JPanel();
         Font buttonFont = new Font("Times", Font.BOLD, 14);
-        JButton addButton = new JButton("Add Player");
-        JButton saveButton = new JButton("Save Changes");
+        JButton addButton = new JButton("Add");
+        JButton saveButton = new JButton("Save");
         JButton deleteButton = new JButton("Delete");
         JButton addDayButton = new JButton("Add Day");
 
@@ -455,7 +450,12 @@ public class TeamRosterGUI {
                         
                     }
                 }
+                
+                for (int j = 0; j < playerStats.length; j++) {
 
+                    playerStats[j][2] = roster.getPlayers().get(playerStats[j][1]).getShootingStats().get(dayStats[j][0]).calculateFreeThrowPercentage() + "";
+                    playerStats[j][3] = roster.getPlayers().get(playerStats[j][1]).getShootingStats().get(dayStats[j][0]).calculateThreePointPercentage() + "";
+                }
 
 
                 
