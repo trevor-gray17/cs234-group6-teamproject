@@ -159,6 +159,7 @@ public class TeamRosterGUI {
 
 
         DayStatsTable = new JTable(dayStats, dayColNames);
+        DayStatsTable.setAutoCreateRowSorter(true); // Add this line
 
         DayStatsTable.setBackground(Color.LIGHT_GRAY);
         DayStatsTable.setFont(new Font("Times", Font.PLAIN, 25));
@@ -450,12 +451,12 @@ public class TeamRosterGUI {
                         
                     }
                 }
-                
-                for (int j = 0; j < playerStats.length; j++) {
 
-                    playerStats[j][2] = roster.getPlayers().get(playerStats[j][1]).getShootingStats().get(dayStats[j][0]).calculateFreeThrowPercentage() + "";
-                    playerStats[j][3] = roster.getPlayers().get(playerStats[j][1]).getShootingStats().get(dayStats[j][0]).calculateThreePointPercentage() + "";
-                }
+                //for (int j = 0; j < playerStats.length; j++) {
+
+                    //playerStats[j][2] = roster.getPlayers().get(playerStats[j][1]).getShootingStats().get(dayStats[j][0]).calculateFreeThrowPercentage() + "";
+                    //playerStats[j][3] = roster.getPlayers().get(playerStats[j][1]).getShootingStats().get(dayStats[j][0]).calculateThreePointPercentage() + "";
+                //}
 
 
                 

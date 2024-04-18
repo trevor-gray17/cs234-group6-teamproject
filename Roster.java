@@ -55,12 +55,12 @@ public class Roster {
 
 public void saveRosterToDB() {
     String insertPlayerSQL = "INSERT INTO Player(number, name, year) VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE year=VALUES(year);";
-    String insertStatSQL = "INSERT INTO Stats_1(practice_date, playerName, threePointersTaken, threePointersMade, freeThrowsTaken, freeThrowsMade, PlayerID) VALUES(?, ?, ?, ?, ?, ?, ?);";
-    String selectPlayerIDSQL = "SELECT PlayerID FROM Player WHERE name = ? AND number = ?;";
+    String insertOrUpdateStatSQL = "INSERT INTO Stats_1 (practice_date, PlayerName, ThreePointersTaken, ThreePointersMade, FreeThrowsTaken, FreeThrowsMade, PlayerID) VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE ThreePointersTaken = VALUES(ThreePointersTaken), ThreePointersMade = VALUES(ThreePointersMade), FreeThrowsTaken = VALUES(FreeThrowsTaken), FreeThrowsMade = VALUES(FreeThrowsMade)";
+    String selectPlayerIDSQL = "SELECT PlayerID FROM Player WHERE Number = ? AND Name = ?;";
 
     try (Connection conn = this.connect();
          PreparedStatement pstmtPlayer = conn.prepareStatement(insertPlayerSQL, Statement.RETURN_GENERATED_KEYS);
-         PreparedStatement pstmtStat = conn.prepareStatement(insertStatSQL);
+         PreparedStatement pstmtStat = conn.prepareStatement(insertOrUpdateStatSQL);
          PreparedStatement pstmtSelectPlayerID = conn.prepareStatement(selectPlayerIDSQL)) {
 
 
@@ -78,8 +78,8 @@ public void saveRosterToDB() {
                 playerID = rs.getLong(1);
             } else {
                 // If the player was not inserted but updated, retrieve existing PlayerID
-                pstmtSelectPlayerID.setString(2, player.getName());
                 pstmtSelectPlayerID.setInt(1, player.getNumber());
+                pstmtSelectPlayerID.setString(2, player.getName());
                 ResultSet rsID = pstmtSelectPlayerID.executeQuery();
                 if (rsID.next()) {
                     playerID = rsID.getLong("PlayerID");
@@ -90,6 +90,11 @@ public void saveRosterToDB() {
 
             for (Map.Entry<String, ShootingStatistics> entry : player.getShootingStats().entrySet()) {
                 ShootingStatistics stat = entry.getValue();
+                System.out.println(entry.getKey());
+
+                
+
+
                 System.out.println("Save to Database");
                 pstmtStat.setString(1, entry.getKey()); // Assuming entry.getKey() is the practice_date
                 pstmtStat.setString(2, player.getName());
@@ -99,7 +104,7 @@ public void saveRosterToDB() {
                 pstmtStat.setInt(6, stat.getFreeThrowsMade());
                 pstmtStat.setLong(7, playerID);
                 pstmtStat.executeUpdate();
-                break;
+                //break;
             }
         }
     } catch (SQLException e) {
@@ -119,7 +124,8 @@ public void loadRosterFromDB() {
          ResultSet rsPlayers = pstmtPlayer.executeQuery()) {
          System.out.println("Loading roster from database...");
 
-        while (rsPlayers.next()) {
+
+         while (rsPlayers.next()) {
             BasketballPlayer player = new BasketballPlayer(
                 rsPlayers.getInt("number"),
                 rsPlayers.getString("name"),
@@ -136,12 +142,20 @@ public void loadRosterFromDB() {
                     rsStats.getInt("threePointersMade"),
                     rsStats.getInt("freeThrowsTaken"),
                     rsStats.getInt("freeThrowsMade")
+                    
                 );
                 player.addShootingStats(rsStats.getString("practice_date"), stats); // Ensure ShootingStatistics constructor and addShootingStats support this
+
             }
-            System.out.println("This the player from DB  hopefully: " + player);
-            this.addPlayer(player); // Adds the player and their stats to the roster
+
+                
+
+
+                this.addPlayer(player);
+                
+
         }
+        System.out.println(players);
     } catch (SQLException e) {
         System.out.println(e.getMessage());
     }

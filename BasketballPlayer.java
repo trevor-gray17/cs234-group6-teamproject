@@ -49,7 +49,7 @@ class BasketballPlayer {
 
     public void setShootingStats(Map<String, ShootingStatistics> shootingStats) {
         this.shootingStats = shootingStats;
-        this.shootingStats.replace(name, shootingStats.get(shootingStats));
+        //this.shootingStats.replace(name, shootingStats.get(shootingStats));
     }
 
     
