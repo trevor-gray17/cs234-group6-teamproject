@@ -44,7 +44,7 @@ public class Roster {
         Connection conn = null;
         try {
             // Replace with your database details
-            String url = "jdbc:mysql://localhost:3306/roster?user=root&password=Jillrusso";
+            String url = "jdbc:mysql://localhost:3306/roster?user=&password=";
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
